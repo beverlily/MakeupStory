@@ -1,0 +1,27 @@
+﻿@{
+    ViewBag.Title = "New";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="formContainer">
+<h2>New Brand</h2>
+@Html.ActionLink("Back to Brand List", "List", "Brand", null, new { @class = "emphasize right" })
+
+<form method="POST" action="/Brand/New">
+    <div>
+        <label for="BrandName_New">Name</label>
+        <input type="text" id="BrandName_New" name="BrandName_New" />
+    </div>
+    <div>
+        <label for="BrandAbout_New">About</label>
+        <textarea id="BrandAbout_New" name="BrandAbout_New"></textarea>
+    </div>
+    <div class="buttonContainer">
+        <input type="submit" class="button" value="Submit" />
+        @Html.ActionLink("Cancel", "List", "Brand", null, new { @class = "button" })
+    </div>
+</form>
+</div>
+
+
+
+

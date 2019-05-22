@@ -1,0 +1,86 @@
+﻿@model MakeupCMS.Models.ViewModels.MakeupProductEdit
+@{
+    ViewBag.Title = "Edit";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="formContainer">
+    <h2>Edit @Model.MakeupProduct.MakeupName</h2>
+    @Html.ActionLink("Back to Makeup List", "List", "MakeupProduct", null, new { @class = "emphasize right" })
+
+    <!--Referenced https://stackoverflow.com/questions/8551528/httppostedfilebase-always-return-null-in-asp-net-mvc -->
+    <form method="POST" action="/MakeupProduct/Edit/@Model.MakeupProduct.MakeupProductId" enctype="multipart/form-data">
+        <div>
+            <label for="MakeupName_Edit">Name</label>
+            <input type="text" id="MakeupName_Edit" name="MakeupName_Edit" value="@Model.MakeupProduct.MakeupName" />
+        </div>
+        <div>
+            <label for="MakeupBrand_Edit">Brand</label>
+            <select id="MakeupBrand_Edit" name="MakeupBrand_Edit">
+                @foreach (var brand in Model.Brands)
+                {
+                    string currentBrand = "";
+                    if (brand.BrandId == Model.MakeupProduct.Brand.BrandId)
+                    {
+                        currentBrand = "selected";
+                    }
+                    <option value="@brand.BrandId" @currentBrand>@brand.BrandName</option>
+                }
+            </select>
+        </div>
+        <div>
+            <label for="MakeupDescription_Edit">Description</label>
+            <textarea id="MakeupDescription_Edit" name="MakeupDescription_Edit">@Model.MakeupProduct.MakeupDescription</textarea>
+        </div>
+        <div>
+            <label for="MakeupCategory_Edit">Category</label>
+            <input type="text" id="MakeupCategory_Edit" name="MakeupCategory_Edit" value="@Model.MakeupProduct.MakeupCategory" />
+        </div>
+        <div>
+            <label for="MakeupIngredients_Edit">Ingredients</label>
+            <textarea id="MakeupIngredients_Edit" name="MakeupIngredients_Edit">@Model.MakeupProduct.MakeupIngredients</textarea>
+        </div>
+        <div>
+            <label for="MakeupDateOpened_Edit">Date Opened</label>
+            <input type="date" id="MakeupDateOpened_Edit" name="MakeupDateOpened_Edit" value="@Model.MakeupProduct.MakeupDateOpened.ToShortDateString()" />
+        </div>
+        <div>
+            <label for="MakeupMonthShelfLife_Edit">Shelf Life</label>
+            <select id="MakeupMonthShelfLife_Edit" name="MakeupMonthShelfLife_Edit">
+                @{
+                    int[] shelfLifeArray = { 3, 6, 12, 18, 24 };
+                    string selected = "";
+                    foreach (int months in shelfLifeArray)
+                    {
+                        if (Model.MakeupProduct.MakeupMonthShelfLife == months)
+                        {
+                            selected = "selected";
+                        }
+                        <option value=@months @selected>@months Months</option>
+                    }
+                }
+            </select>
+        </div>
+        <div>
+            <label for="MakeupRating_Edit">Rating</label>
+            <input type="number" min="0" max="5" id="MakeupRating_Edit" name="MakeupRating_Edit" value="@Model.MakeupProduct.MakeupRating" /> /5
+        </div>
+        <div>
+            <label for="MakeupIsRecommended_Edit">Would you recommend this product?</label>
+            <input type="checkbox" id="MakeupIsRecommended_Edit" name="MakeupIsRecommended_Edit" value="1"
+                    @if (Model.MakeupProduct.IsRecommended == 1) { @Html.Raw("checked") } />
+        </div>
+        <br />
+        <div>
+            <label for="makeupImg">Upload an image:</label>
+            <input type="file" id="makeupImg" name="makeupImg">
+        </div>
+        <div class="buttonContainer">
+            <input type="submit" class="button" value="Submit" />
+            @Html.ActionLink("Cancel", "Details/" + Model.MakeupProduct.MakeupProductId, "MakeupProduct", null, new { @class = "button" })
+        </div>
+    </form>
+</div>
+
+
+
+

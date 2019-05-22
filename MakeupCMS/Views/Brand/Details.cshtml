@@ -1,0 +1,54 @@
+﻿@model MakeupCMS.Models.Brand
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="flex-container">
+    <div class="itemImageAndButtons">
+        <div class="itemDetailsPicture">
+            @ItemHelper.DisplayPicture(Model.HasPic, "brands", Model.BrandId, Model.ImgType)
+        </div>
+        <div class="buttonContainer">
+            @Html.ActionLink("Edit", "Edit/" + Model.BrandId, "Brand", null, new { @class = "button" })
+            @Html.ActionLink("Delete", "Delete/" + Model.BrandId, "Brand", null, new { @class = "button" })
+        </div>
+        @Html.ActionLink("Back to Brand List", "List", "Brand", null, new { @class = "emphasize" })
+    </div>
+    <div class="itemDetails">
+        <h2>@Model.BrandName</h2>
+        <br />
+        <h3>About the Brand</h3>
+        @Model.BrandAbout
+    </div>
+</div>
+<br />
+<br />
+<div id="brandProducts">
+    <h2 class="center">Makeup Products By @Model.BrandName </h2>
+    <div class="buttonContainer">
+        @Html.ActionLink("Add Makeup", "New", "MakeupProduct", null, new { @class = "button" })
+    </div>
+    <br />
+    <div id="brandProductList" class="flex-container">
+        @foreach (var brandProduct in Model.MakeupProducts)
+        {
+            <div class="listSmallItem">
+                <div class="listSmallThumbnail">
+                    <a href="/MakeupProduct/Details/@brandProduct.MakeupProductId">
+                        @ItemHelper.DisplayPicture(brandProduct.HasPic, "makeupProducts", brandProduct.MakeupProductId, brandProduct.ImgType)
+                    </a>
+                </div>
+                <div class="listInfo">
+                    <div class="brand"> 
+                        @Html.ActionLink(brandProduct.MakeupName, "Details/" + brandProduct.MakeupProductId, "MakeupProduct")
+                    </div>
+                    @ItemHelper.DisplayRating(brandProduct.MakeupRating)
+                </div>
+            </div>
+        }
+    </div>
+</div>
+
+
+
+

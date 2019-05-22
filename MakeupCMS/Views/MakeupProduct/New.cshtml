@@ -1,0 +1,63 @@
+﻿@model MakeupCMS.Models.ViewModels.MakeupProductEdit
+@{
+    ViewBag.Title = "New";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="formContainer">
+    <h2>New Makeup Product</h2>
+    @Html.ActionLink("Back to Makeup List", "List", "MakeupProduct", null, new { @class = "emphasize right" })
+    <form method="POST" action="/MakeupProduct/Create">
+        <div>
+            <label for="MakeupName_New">Name</label>
+            <input type="text" id="MakeupName_New" name="MakeupName_New" />
+        </div>
+        <div>
+            <label for="MakeupBrand_New">Brand</label>
+            <select id="MakeupBrand_New" name="MakeupBrand_New">
+                @foreach (var brand in Model.Brands)
+                {
+                    <option value="@brand.BrandId">@brand.BrandName</option>
+                }
+            </select>
+        </div>
+        <div>
+            <label for="MakeupDescription_New">Description</label>
+            <textarea id="MakeupDescription_New" name="MakeupDescription_New"></textarea>
+        </div>
+        <div>
+            <label for="MakeupCategory_New">Category</label>
+            <input type="text" id="MakeupCategory_New" name="MakeupCategory_New" />
+        </div>
+        <div>
+            <label for="MakeupIngredients_New">Ingredients</label>
+            <textarea id="MakeupIngredients_New" name="MakeupIngredients_New"></textarea>
+        </div>
+        <div>
+            <label for="MakeupDateOpened_New">Date Opened</label>
+            <input type="date" id="MakeupDateOpened_New" name="MakeupDateOpened_New" />
+        </div>
+        <div>
+            <label for="MakeupMonthShelfLife_New">Shelf Life</label>
+            <select id="MakeupMonthShelfLife_New" name="MakeupMonthShelfLife_New">
+                <option value="3">3 Months</option>
+                <option value="6">6 Months</option>
+                <option value="12">12 Months</option>
+                <option value="18">18 Months</option>
+                <option value="24">24 Months</option>
+            </select>
+        </div>
+        <div>
+            <label for="MakeupRating_New">Rating</label>
+            <input type="number" min="0" max="5" id="MakeupRating_New" name="MakeupRating_New" /> /5
+        </div>
+        <div>
+            <label for="MakeupIsRecommended_New">Would you recommend this product?</label>
+            <input type="checkbox" id="MakeupIsRecommended_New" name="MakeupIsRecommended_New" value=1>
+        </div>
+        <div class="buttonContainer">
+            <input type="submit" class="button" value="Submit" />
+            @Html.ActionLink("Cancel", "List", "MakeupProduct", null, new { @class = "button" })
+        </div>
+    </form>
+</div>
+

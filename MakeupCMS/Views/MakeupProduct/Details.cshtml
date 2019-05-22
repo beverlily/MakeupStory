@@ -1,0 +1,63 @@
+﻿@model MakeupCMS.Models.MakeupProduct
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="flex-container">
+    <div class="itemImageAndButtons">
+        <div class="itemDetailsPicture">
+            @ItemHelper.DisplayPicture(Model.HasPic, "makeupProducts", Model.MakeupProductId, Model.ImgType)
+        </div>
+        <br />
+        <div class="buttonContainer">
+            @Html.ActionLink("Edit", "Edit/" + Model.MakeupProductId, "MakeupProduct", null, new { @class = "button" })
+            @Html.ActionLink("Delete", "Delete/" + Model.MakeupProductId, "MakeupProduct", null, new { @class = "button" })
+        </div>
+        @Html.ActionLink("Back to Makeup List", "List", "MakeupProduct", null, new { @class = "emphasize" })
+    </div>
+    <div class="itemDetails">
+        @Html.ActionLink(Model.Brand.BrandName, "Details/" + Model.Brand.BrandId, "Brand", null, new { @class = "brand" })
+        <h2 class="topSpace">@Model.MakeupName</h2>
+        @ItemHelper.DisplayRating(Model.MakeupRating)
+        <br />
+        <!--If product is recommended, prints out recommended in green with a heart-->
+        @if (Model.IsRecommended == 1)
+        {
+            <div class="recommend">Recommended <i class="fas fa-heart"></i></div>
+        }
+        <br />
+        <h3>Description</h3>
+        @Model.MakeupDescription
+        <br />
+        <br />
+        <h3>Category</h3>
+        @Model.MakeupCategory
+        <br />
+        <br />
+        <h3>Ingredients</h3>
+        @Model.MakeupIngredients
+        <br />
+        <br />
+        <h3>Date Opened</h3>
+        @Model.MakeupDateOpened.ToShortDateString()
+        <br />
+        <br />
+        <h3>Shelf Life</h3>
+        @Model.MakeupMonthShelfLife Months
+        <br />
+        <br />
+        <h3>Expiry Date</h3>
+        @{
+            if (Model.MakeupExpiryDate < DateTime.Now)
+            {
+                //if makeup has expired, prints out the expiry date in red
+                <span class="expired emphasize">Expired On: @Model.MakeupExpiryDate.ToString("yyyy-MM-dd")</span>
+            }
+            else
+            {
+                @Model.MakeupExpiryDate.ToString("yyyy-MM-dd");
+            }
+        }
+    </div>
+</div>
+

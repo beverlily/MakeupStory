@@ -1,0 +1,379 @@
+﻿@import url('https://fonts.googleapis.com/css?family=Open+Sans|Roboto|Montserrat');
+/************************************************
+ * TABLE OF CONTENTS
+ * =================
+ * 1. DEFAULT OVERRIDES
+ * 2. GENERAL CLASSES
+ * 3. GENERAL STYLING
+ * 4. HEADER AND FOOTER
+ * 5. HOME PAGE
+ * 6. NEW AND EDIT VIEW
+ * 7. DETAILS VIEW
+ * 8. LIST VIEW
+ ***********************************************/
+
+/*1. DEFAULT OVERRIDES*/
+html {
+    box-sizing: border-box;
+    font-size: 16px;
+    font-family: 'Open Sans', 'Lato', sans-serif;
+}
+
+*, *::before, *::after {
+    box-sizing: inherit;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    color: #7e8fb5;
+}
+
+h2 {
+    font-size: 2rem;
+}
+
+h2, h3 {
+    margin: 0;
+    line-height: 0.75em;
+}
+
+main {
+    min-height: calc( 100vh - 50px );
+    position: relative;
+    top: 50px;
+}
+
+/* Override the default bootstrap behavior where horizontal description lists will truncate terms that are too long to fit in the left column */
+.dl-horizontal dt {
+    white-space: normal;
+}
+
+/* Set width on the form input elements since they're 100% wide by default */
+input:not([type=submit]), select, textarea {
+    max-width: 280px;
+    border: 1px solid darkgray;
+    margin-bottom: 15px;
+}
+
+input, textarea {
+    padding: 5px;
+}
+
+img {
+    padding: 0;
+    margin: 0;
+}
+
+a {
+    color: #7e8fb5;
+    text-transform: uppercase;
+    text-decoration: none;
+}
+
+    a:hover {
+        text-decoration: none;
+    }
+
+    a:hover, .button:hover, #searchButton:hover {
+        color: #77DDF9;
+    }
+
+ul {
+    list-style: none;
+    padding: 0;
+}
+
+li {
+    display: inline-block;
+}
+
+input[type="text"], input[type="date"], textarea {
+    display: block;
+}
+
+/*2. GENERAL CLASSES*/
+.page-wrapper {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 50px;
+}
+
+.wrapper {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 25px 50px;
+}
+
+.flex-container {
+    display: flex;
+    flex-flow: row wrap;
+}
+
+.hidden {
+    position: absolute;
+    left: -10000px;
+}
+
+.buttonContainer, #search{
+    width: 100%;
+    padding: 20px 0;
+}
+
+.button {
+    background-color: white;
+    border: 2px solid #7e8fb5;
+    padding: 7px;
+    border-radius: 5px;
+    margin-right: 10px;
+    display: inline-block;
+}
+
+    .button:hover {
+        border: 2px solid #77DDF9;
+    }
+
+.smallTitle {
+    font-size: 1.3rem;
+}
+
+.darkpink {
+    color: #FFA0A3;
+}
+
+.center {
+    text-align: center;
+}
+
+.topSpace {
+    margin-top: 3px;
+}
+
+.right {
+    float: right;
+}
+
+/*3. GENERAL STYLING*/
+
+a, .listSmallThumbnail img, .listThumbnail img, .button, #searchButton {
+    transition: all 0.5s;
+}
+
+h2, .smallTitle, .button, .bannerTitle, #footer {
+    text-transform: uppercase;
+    font-family: 'Roboto', 'Arial', sans-serif;
+}
+
+.smallTitle, .listSmallItem, .itemDetails h3 {
+    margin-bottom: 10px;
+}
+
+.itemDetails h3, .emphasize, .brand, .listInfo, .recommend {
+    text-transform: uppercase;
+    font-weight: bold;
+}
+
+.itemDetails h3, .brand {
+    color: #444657;
+    font-size: 1rem;
+}
+
+#brandProducts h2, .formContainer h2 {
+    width: 100%;
+    border-bottom: 1px solid darkgray;
+    padding-bottom: 10px;
+    margin-bottom: 15px;
+}
+
+/*4. HEADER AND FOOTER*/
+#header, footer {
+    background: black;
+    color: white;
+}
+
+    #header ul {
+        float: right;
+    }
+
+#footer {
+    text-align: center;
+    padding: 10px;
+    margin-top: 50px;
+}
+
+    #footer p {
+        margin: 0;
+    }
+
+/*5. HOME PAGE*/
+#home {
+    background-image: url("../imgs/home.jpg");
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    width: 100%;
+    height: calc( 100vh - 50px );
+    color: white;
+}
+
+    #home h2 {
+        margin-bottom: 15px;
+    }
+
+#homeText {
+    border: 5px solid white;
+    width: 40%;
+    padding: 25px;
+    font-size: 1.1rem;
+    background: rgba(0,0,0,0.2);
+    height: 300px;
+    margin: 100px;
+}
+
+.heart {
+    font-size: .75rem;
+    color: #ffd0d7;
+    margin: 2px;
+}
+
+.quote {
+    font-style: italic;
+}
+
+/*6. NEW AND EDIT VIEW*/
+.formContainer {
+    border: 1px solid lightgrey;
+    padding: 50px;
+    box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.1);
+    background: #f9f9f9;
+    /*Used https://mycolor.space/ to generate gradient*/
+    background-image: linear-gradient(to bottom, #ffffff, #fcfcfc, #f9f9f9, #f7f7f7, #f4f4f4);
+}
+
+    .formContainer h2 {
+        font-family: 'Montserrat', sans-serif;
+    }
+
+/*7. DETAILS VIEW*/
+.itemImageandButtons {
+    flex: 8;
+}
+
+.itemDetails {
+    flex: 2;
+}
+
+.itemDetailsPicture img {
+    height: 300px;
+    width: 300px;
+    object-fit: cover;
+    margin-right: 25px;
+}
+
+.rating {
+    color: pink;
+}
+
+.greyRating {
+    color: grey;
+}
+
+.rating, .greyRating {
+    font-size: 0.7rem;
+}
+
+.recommend {
+    color: #84BE6A;
+}
+
+.expired {
+    color: red;
+}
+
+/*8. LIST VIEW*/
+
+.banner {
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-position: center center;
+    width: 100%;
+    height: 200px;
+    color: white;
+}
+
+.bannerTitle {
+    font-size: 2rem;
+    color: white;
+    font-weight: bold;
+    width: 100%; 
+    margin-left: 85px;
+    align-self: center;
+    line-height: 1; 
+}
+
+#brandBanner {
+    background-image: url("../imgs/brands/banner.jpg");
+}
+
+#makeupBanner {
+    background-image: url("../imgs/makeupProducts/banner.jpg");
+}
+
+#searchName {
+    display: inline-block;
+    margin: 0;
+}
+
+#searchButton{
+    background: none;
+    border: none;
+}
+
+#makeupProductList {
+    flex: 7;
+}
+
+#brandProductList .listSmallItem {
+    text-align: center;
+    width: 200px;
+}
+
+#listRecommended {
+    flex: 2;
+}
+
+.listSmallThumbnail img {
+    border-radius: 50%;
+    height: 100px;
+    width: 100px;
+    object-fit: cover;
+}
+
+.listThumbnail img, .listItem {
+    width: 175px;
+}
+
+.listItem, #listRecommended {
+    margin-bottom: 15px;
+    margin-right: 15px;
+}
+
+.listItem {
+    display: inline-block;
+    vertical-align: top;
+}
+
+.listInfo {
+    padding: 8px 8px 10px 8px;
+}
+
+.listThumbnail img {
+    height: 200px;
+    object-fit: cover;
+}
+
+    .listSmallThumbnail img:hover, .listThumbnail img:hover {
+        opacity: 0.8;
+    }

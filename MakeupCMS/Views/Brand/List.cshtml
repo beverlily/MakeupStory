@@ -1,0 +1,38 @@
+﻿@model IEnumerable<MakeupCMS.Models.Brand>
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_UnwrappedLayout.cshtml";
+}
+<div id="brandBanner" class="banner flex-container">
+    <h2 class="bannerTitle wrapper">Makeup Brands</h2>
+</div>
+
+<div class="flex-container wrapper">
+    <div class="buttonContainer">
+        @Html.ActionLink("Add Brand", "New", "Brand", null, new { @class = "button" })
+        <div id="search">
+            <form action="" method="GET">
+                <label for="searchName" class="hidden">Search</label>
+                <input type="text" id="searchName" class="searchInput" name="search" placeholder=" Search" />
+                <button type="submit" id="searchButton"><i class="fas fa-search"></i></button>
+            </form>
+        </div>
+    </div>
+    <div id="brandList">
+        @foreach (var brand in Model)
+        {
+            <div class="listItem">
+                <div class="listThumbnail">
+                    <div>
+                        <a href="Details/@brand.BrandId">
+                            @ItemHelper.DisplayPicture(brand.HasPic, "brands", brand.BrandId, brand.ImgType)
+                        </a>
+                    </div>
+                    <div class="listInfo center">
+                        <h3>@Html.ActionLink(brand.BrandName, "Details/" + brand.BrandId, null, new { @class = "brand" })</h3>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</div>

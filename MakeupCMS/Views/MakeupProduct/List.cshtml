@@ -1,0 +1,77 @@
+﻿@model IEnumerable<MakeupCMS.Models.MakeupProduct>
+@{
+    ViewBag.Title = "List";
+    Layout = "~/Views/Shared/_UnwrappedLayout.cshtml";
+}
+<div id="makeupBanner" class="banner flex-container">
+    <h2 class="bannerTitle wrapper">Makeup Products</h2>
+</div>
+
+<div class="flex-container wrapper">
+    <div class="buttonContainer">
+        @Html.ActionLink("Add Makeup", "New", "MakeupProduct", null, new { @class = "button" })
+        <div id="search">
+            <form action="" method="GET">
+                <label for="searchName" class="hidden">Search</label>
+                <input type="text" id="searchName" class="searchInput" name="search" placeholder=" Search" />
+                <button type="submit" id="searchButton"><i class="fas fa-search"></i></button>
+            </form>
+        </div>
+    </div>
+
+    <div id="makeupProductList">
+        @foreach (var makeupProduct in Model)
+        {
+            <div class="listItem">
+                <div class="listThumbnail">
+                    <a href="Details/@makeupProduct.MakeupProductId">
+                        @ItemHelper.DisplayPicture(makeupProduct.HasPic, "makeupProducts", makeupProduct.MakeupProductId, makeupProduct.ImgType)
+                    </a>
+                </div>
+                <div class="listInfo center">
+                    @Html.ActionLink(makeupProduct.Brand.BrandName, "Details/" + makeupProduct.Brand.BrandId, "Brand", null, new { @class = "brand" })
+                    <br />
+                    @Html.ActionLink(makeupProduct.MakeupName, "Details/" + makeupProduct.MakeupProductId, "MakeupProduct")
+                    <br />
+                    <!--Calls custom helper function to print rating-->
+                    @ItemHelper.DisplayRating(makeupProduct.MakeupRating)
+                </div>
+            </div>
+        }
+    </div>
+    <aside id="listRecommended">
+        <h3 class="smallTitle darkpink">Recommended Products <i class="fas fa-heart"></i></h3>
+        @{
+            //Displays recommended products
+            int maxRecommended = 3;
+            int recommendedCount = 0;
+            foreach (var makeupProduct in Model)
+            {
+                if (recommendedCount < maxRecommended && makeupProduct.IsRecommended == 1)
+                {
+                    recommendedCount++;
+                    <div class="listSmallItem">
+                        <div class="listSmallThumbnail">
+                            <a href="Details/@makeupProduct.MakeupProductId">
+                                @ItemHelper.DisplayPicture(makeupProduct.HasPic, "makeupProducts", makeupProduct.MakeupProductId, makeupProduct.ImgType)
+                            </a>
+                        </div>
+                        <div class="listInfo">
+                            @Html.ActionLink(makeupProduct.Brand.BrandName, "Details/" + makeupProduct.Brand.BrandId, "Brand", null, new { @class = "brand" })
+                            <br />
+                            @Html.ActionLink(makeupProduct.MakeupName, "Details/" + makeupProduct.MakeupProductId, "MakeupProduct")
+                            <br />
+                            @ItemHelper.DisplayRating(makeupProduct.MakeupRating)
+                        </div>
+                    </div>
+                }
+                else if (recommendedCount >= maxRecommended)
+                {
+                    break;
+                }
+            }
+        }
+    </aside>
+</div>
+
+

@@ -1,0 +1,27 @@
+﻿@model MakeupCMS.Models.Brand
+@{
+    ViewBag.Title = "Edit";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="formContainer">
+    <h2>Edit @Model.BrandName</h2>
+    @Html.ActionLink("Back to Brand List", "List", "Brand", null, new { @class = "emphasize right" })
+    <form method="POST" action="/Brand/Edit/@Model.BrandId" enctype="multipart/form-data">
+        <div>
+            <label for="BrandName_Edit">Name</label>
+            <input type="text" id="BrandName_Edit" name="BrandName_Edit" value="@Model.BrandName" />
+        </div>
+        <div>
+            <label for="BrandAbout_Edit">About</label>
+            <textarea id="BrandAbout_Edit" name="BrandAbout_Edit">@Model.BrandAbout</textarea>
+        </div>
+        <div>
+            <label for="brandImg">Upload an image:</label>
+            <input type="file" id="brandImg" name="brandImg">
+        </div>
+        <div class="buttonContainer">
+            <input type="submit" class="button" value="Submit" />
+            @Html.ActionLink("Cancel", "Details/" + Model.BrandId, "Brand", null, new { @class = "button" })
+        </div>
+    </form>
+</div>

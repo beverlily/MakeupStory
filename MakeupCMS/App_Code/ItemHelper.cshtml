@@ -1,0 +1,37 @@
+﻿<!-- Referenced https://docs.microsoft.com/en-us/aspnet/web-pages/overview/ui-layouts-and-themes/creating-and-using-a-helper-in-an-aspnet-web-pages-site -->
+
+<!--Prints out stars based on the rating of the product-->
+@helper DisplayRating(int makeupRating)
+{
+    int maxStars = 5;
+    int starCount = 0;
+    int rating = makeupRating;
+    for (int i = 0; i < rating && i < maxStars; i++)
+    {
+        //filled out star
+        <i class="fas fa-star rating"></i>
+        starCount++;
+    }
+    for (int i = 0; starCount < maxStars; i++)
+    {
+        starCount++;
+        //grey star
+        <i class="fas fa-star greyRating"></i>
+    }
+}
+
+<!--If there's an image, displays image, if not, displays default image-->
+@helper DisplayPicture(int itemHasPic, string itemFolderName, int itemId, string itemImgType)
+{
+    string path = "/imgs/" + itemFolderName + "/";
+
+    if (itemHasPic == 1)
+    {
+        path += itemId.ToString() + "." + itemImgType;
+    }
+    else
+    {
+        path += "default.jpeg"; //default image 
+    }
+    <img src="@path"/>
+}
